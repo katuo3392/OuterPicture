@@ -12,10 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var outerImg:UIImage?               // 上着
+    var bottomsImg:UIImage?             // ズボン
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    {
+        let folderNames = ["Outer","Bottoms"]
+        let path = NSHomeDirectory() + "/Documents"
+        
+        let fileManager = FileManager.default
+        
+        for folderName in folderNames
+        {
+            let dirPath = path + "/" + folderName
+  
+            if (!fileManager.fileExists(atPath: dirPath))
+            {
+                try? fileManager.createDirectory(atPath: dirPath,
+                                                 withIntermediateDirectories: true,
+                                                 attributes: nil)
+            }
+        }
+        
         return true
     }
 
